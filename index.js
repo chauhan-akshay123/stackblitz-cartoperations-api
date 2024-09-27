@@ -8,23 +8,23 @@ let cart = [
   { productId: 2, name: 'Mobile', price: 20000, quantity: 2 }
 ];
 
-function addNewItem(cart, productId, name, price, quantity){
+function addNewItem(cart, productId, name, price, quantity) {
   cart.push({
     productId: productId,
     name: name,
     price: price,
-    quantity: quantity
+    quantity: quantity 
   });
   return cart;
 }
 
-app.get('/cart/add', (req, res)=>{
- let productId = parseInt(req.query.productId);
- let name = req.query.name;
- let price = parseInt(req.query.price);
- let quantity = parseInt(req.query.qunatity);
- let result = addNewItem(cart, productId, name, price, quantity);
- res.json(result);
+app.get('/cart/add', (req, res) => {
+  let productId = parseInt(req.query.productId);
+  let name = req.query.name;
+  let price = parseInt(req.query.price);
+  let quantity = parseInt(req.query.quantity);
+  let result = addNewItem(cart, productId, name, price, quantity);
+  res.json(result);
 });
 
 function editItemQunatity(cart, productId, quantity){
@@ -75,7 +75,7 @@ app.get('/cart/total-quantity', (req, res)=>{
 function cartTotalPrice(cart){
   let totalPrice = 0;
   for(let i=0; i<cart.length; i++){
-    totalPrice = totalPrice + cart[i].price;
+    totalPrice = totalPrice + cart[i].price*cart[i].quantity;
   }
   return totalPrice;
 }
